@@ -15,6 +15,12 @@ else:
 def hello_world():
     return 'Hello, Docker!'
 
+@app.route('/add')
+def add_row():
+    with psycopg2.connect(host="db", user="postgres", password=password, database="example") as conn:
+        with conn.cursor() as cur:
+            cur.execute("INSERT INTO widgets VALUES ('CHAKRADHAR', 'MSCS UTD')")
+            return "Row Inserted"
 
 @app.route('/widgets')
 def get_widgets():
